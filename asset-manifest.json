@@ -1,11 +1,18 @@
 {
-  "main.css": "static/css/main.64305670.css",
-  "main.css.map": "static/css/main.64305670.css.map",
-  "main.js": "static/js/main.c6249c59.js",
-  "main.js.map": "static/js/main.c6249c59.js.map",
-  "static/media/close-arrow.svg": "static/media/close-arrow.82d87f85.svg",
+  "main.css": "static/css/main.f636e6d5.css",
+  "main.css.map": "static/css/main.f636e6d5.css.map",
+  "main.js": "static/js/main.0ecbd5ef.js",
+  "main.js.map": "static/js/main.0ecbd5ef.js.map",
+  "static/media/close-arrow.svg": "static/media/close-arrow.28934c06.svg",
+  "static/media/colombia-country.svg": "static/media/colombia-country.5fcd2bac.svg",
+  "static/media/espagne-country.svg": "static/media/espagne-country.9af559d9.svg",
+  "static/media/exit.svg": "static/media/exit.39f2a013.svg",
   "static/media/facebook.svg": "static/media/facebook.7a6a227f.svg",
+  "static/media/icelande-country.svg": "static/media/icelande-country.992b18ca.svg",
   "static/media/instagram.svg": "static/media/instagram.6f7f616f.svg",
+  "static/media/maroc-country.svg": "static/media/maroc-country.0db7af83.svg",
+  "static/media/new-zelande-country.svg": "static/media/new-zelande-country.39cc8894.svg",
   "static/media/twitter.svg": "static/media/twitter.0729c42a.svg",
+  "static/media/us-country.svg": "static/media/us-country.e6c00634.svg",
   "static/media/video_accueil.mp4": "static/media/video_accueil.366a61d8.mp4"
 }
