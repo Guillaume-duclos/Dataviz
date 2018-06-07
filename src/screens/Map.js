@@ -9,8 +9,9 @@ import Popup from '../components/popup/Popup';
 import Galery from '../components/galery/Galery';
 import HomeIcon from '../img/home-icon.svg';
 import Travelboard from '../components/travelboard/Travelboard';
-import Datas from '../datas/datas';
+import Datas from '../datas/datas.json';
 import MarkerIcon from '../img/marker.png';
+import Axios from 'axios';
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { compose, withProps } from "recompose";
@@ -43,11 +44,32 @@ class Map extends Component {
     activeOption: true,
     modaleStatisticActive: false,
     modaleGaleryActive: false,
-    markers: []
+    markers: [],
+    datas: []
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setMarkers();
+
+    Axios.get('https://guillaumeduclos.fr/datas.json', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      }
+    }).then(function (response) {
+      console.log('response is : ' + response.data);
+      this.setState({datas: response});
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error.response.headers);
+      }
+      else if (error.request) {
+        console.log(error.request);
+      }
+      else {
+        console.log(error.message);
+      }
+      console.log(error.config);
+    });
   }
 
   setDashboardContent = (e, title) => {
@@ -87,7 +109,7 @@ class Map extends Component {
     console.log(lat);
     console.log(long);
 
-    let data = Datas;
+    let data = this.state.datas;
     let jsObj = JSON.parse(data);
     let find = lat;
 
@@ -113,6 +135,8 @@ class Map extends Component {
   };
 
   render() {
+
+    console.log(this.state.datas);
 
     return (
       <div className="container map">
