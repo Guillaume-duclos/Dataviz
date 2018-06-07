@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import MapOptions from '../components/map/MapStyles';
+import { Link } from 'react-router-dom';
 import FacebookIcon from '../img/facebook.svg';
 import TwitterIcon from '../img/twitter.svg';
 import InstagramIcon from '../img/instagram.svg';
-import Dashboard from "../components/dashboard/Dashboard";
+import Dashboard from '../components/dashboard/Dashboard';
+import Statistic from '../components/statistic/Statistic';
+import Popup from '../components/popup/Popup';
+import Galery from '../components/galery/Galery';
+import HomeIcon from '../img/home-icon.svg';
+import Travelboard from '../components/travelboard/Travelboard';
+import Datas from '../datas/datas';
+import MarkerIcon from '../img/marker.png';
+
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { compose, withProps } from "recompose";
+import MapOptions from "../components/map/MapStyles";
 
 const MapComponent = compose (
   withProps({
@@ -22,7 +31,7 @@ const MapComponent = compose (
     defaultCenter={{ lat: 47.9042276, lng: 3.8181689 }}
     options={MapOptions}
   >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />}
+    {props.markers}
   </GoogleMap>
 );
 
@@ -31,7 +40,14 @@ class Map extends Component {
   state = {
     dashboardTitle: '',
     dashboardActive: '',
-    activeOption: true
+    activeOption: true,
+    modaleStatisticActive: false,
+    modaleGaleryActive: false,
+    markers: []
+  }
+
+  componentWillMount() {
+    this.setMarkers();
   }
 
   setDashboardContent = (e, title) => {
@@ -45,55 +61,130 @@ class Map extends Component {
     this.setState({dashboardActive: 'dashboardInactive'});
   }
 
+  openModale = (modale) => {
+    this.setState({
+      modaleStatisticActive: false,
+      modaleGaleryActive: false
+    });
+    switch (modale) {
+      case 'statistic':
+        this.setState({modaleStatisticActive: true});
+        break;
+      case 'moviesGalery':
+        this.setState({modaleGaleryActive: true});
+        break;
+    }
+  }
+
+  closeModale = () => {
+    this.setState({
+      modaleStatisticActive: false,
+      modaleGaleryActive: false
+    });
+  }
+
+  markerClicked = (lat, long) => {
+    console.log(lat);
+    console.log(long);
+
+    let data = Datas;
+    let jsObj = JSON.parse(data);
+    let find = lat;
+
+    let values = Object.keys(jsObj).filter(function(x) {
+      return jsObj[x].postcode.indexOf(find) > -1;
+    }).map(function(x) {
+      return jsObj[x].state;
+    });
+
+    //console.log(values.length > 0 ? values[0] : "not found");
+  }
+
+  setMarkers = () => {
+    let markers = [];
+    for(let i = 0; i < Datas.Movies_datas.length; i++) {
+      markers.push(<Marker
+        key={i} defaultIcon={MarkerIcon}
+        position={{ lat: Datas.Movies_datas[i].Latitude, lng: Datas.Movies_datas[i].Longitude }}
+        onClick={(e) => this.markerClicked(Datas.Movies_datas[i].Latitude, Datas.Movies_datas[i].Longitude)}
+      />);
+    }
+    this.setState({markers});
+  };
+
   render() {
+
     return (
       <div className="container map">
 
-        <MapComponent/>
-        <Dashboard closeDashboard={this.closeDashboard} className={this.state.dashboardActive} dashboardTitle={this.state.dashboardTitle}/>
+        <MapComponent
+          markers={this.state.markers}
+        />
+        <Dashboard
+          closeDashboard={this.closeDashboard}
+          className={this.state.dashboardActive}
+          dashboardTitle={this.state.dashboardTitle}
+          setDashboardContent={this.setDashboardContent}
+        />
+        <Travelboard
+
+        />
+        <Statistic
+          modaleActive={this.state.modaleStatisticActive}
+          closeModale={this.closeModale}
+        />
+        <Galery
+          modaleActive={this.state.modaleGaleryActive}
+          closeModale={this.closeModale}
+        />
+        <Popup/>
 
         <nav>
           <ul className="flex row center">
             <li>FAVORIS</li>
-            <li>STATISTIQUE</li>
-            <li>FILMS</li>
+            <li onClick={() => this.openModale('statistic')} className={this.state.modaleStatisticActive === true ? 'nav-active gothic-font' : 'nav-unactive gothic-font'}>STATISTIQUE</li>
+            <li onClick={() => this.openModale('moviesGalery')} className={this.state.modaleGaleryActive === true ? 'nav-active gothic-font' : 'nav-unactive gothic-font'}>FILMS</li>
             <li>SÉRIES</li>
           </ul>
         </nav>
 
-        <div className={'options flex column '} style={this.state.activeOption == false ? {marginLeft: '-150px'} : {display: ''}} >
+        <div className={'options flex column '} style={this.state.activeOption === false ? {marginLeft: '-150px'} : {display: ''}} >
           <ul>
-            <li onClick={(e) => this.setDashboardContent(e, 'séries')}>SÉRIES</li>
-            <li onClick={(e) => this.setDashboardContent(e, 'voyage')}>VOYAGE</li>
-            <li onClick={(e) => this.setDashboardContent(e, 'films')}>FILMS</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'séries')} className="cormorant-garamond-font">SÉRIES</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'voyage')} className="cormorant-garamond-font">VOYAGE</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'films')} className="cormorant-garamond-font">FILMS</li>
           </ul>
         </div>
 
         <div className="rs">
           <ul className="flex center">
             <li>
-              <a href="" className="flex center">
-                <img src={FacebookIcon}/>
+              <a href="" className="zoom flex center">
+                <img src={FacebookIcon} alt=""/>
               </a>
             </li>
             <li>
-              <a href="" className="flex center">
-                <img src={TwitterIcon}/>
+              <a href="" className="zoom flex center">
+                <img src={TwitterIcon} alt=""/>
               </a>
             </li>
             <li>
-              <a href="" className="flex center">
-                <img src={InstagramIcon}/>
+              <a href="" className="zoom flex center">
+                <img src={InstagramIcon} alt=""/>
               </a>
             </li>
           </ul>
+          <Link to="Home/" className="back-home">
+            <img className="zoom" src={HomeIcon} alt=""/>
+            <p className="gothic-font">Retour à l'écran d'accueil</p>
+          </Link>
           <div className="legend">
             <div>
               <div>
                 <div></div>
               </div>
             </div>
-            <p>La note donnée par les utilisateurs, détermine la taille du point.</p>
+            <p className="gothic-font">La note donnée par les utilisateurs, détermine la taille du point.</p>
           </div>
         </div>
 

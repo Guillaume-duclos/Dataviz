@@ -11,10 +11,10 @@ class Home extends Component {
           Your browser does not support the video tag.
         </video>
         <div className="title flex center column">
-          <p>L'expérience unique</p>
-          <h1>The movie travel</h1>
-          <p>Un voyage autour du monde, <br/>avec vos séries et films préférés.</p>
-          <Link to="Map/">Découvrir</Link>
+          <p className="gothic-font">L'expérience unique</p>
+          <h1 className="cormorant-garamond-font">The movie travel</h1>
+          <p className="cormorant-garamond-font">Un voyage autour du monde, <br/>avec vos séries et films préférés.</p>
+          <Link className="gothic-font" to="Map/">Découvrir</Link>
         </div>
       </div>
     );

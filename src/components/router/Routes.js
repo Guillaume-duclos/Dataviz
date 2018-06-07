@@ -8,6 +8,7 @@ const Routes = () => {
     <HashRouter>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/Home" exact name="map" component={Home} />
         <Route path="/Map" exact name="map" component={Map} />
         <Route path="*" exact component={Home} />
       </Switch>

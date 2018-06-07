@@ -63,19 +63,16 @@ body {
     }
 
     .title p:first-child, .title a {
-      font-family: 'Gothic A1', sans-serif;
       letter-spacing: 1px;
     }
 
     .title h1 {
       font-size: 3em;
       letter-spacing: 10px;
-      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
     }
 
     .title p:nth-child(3) {
-      font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
       font-style: italic;
       letter-spacing: 1px;
@@ -138,8 +135,8 @@ body {
       right: 0;
       z-index: 999;
       border: 0px solid red;
-      width: 100%;
-      margin-top: 20px;
+      width: 80%;
+      margin: 20px auto 0 auto;
 
       ul {
         border: 0px solid greenyellow;
@@ -149,7 +146,14 @@ body {
           color: $white;
           display: inline-block;
           margin: 0 30px;
-          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .nav-active {
+          color: $yello;
+        }
+
+        .nav-unactive {
+          color: $white;
         }
       }
     }
@@ -212,22 +216,29 @@ body {
         margin: 0 15px;
 
         a {
-          width: 30px;
-          height: 30px;
-          -webkit-border-radius: 50%;
-          -moz-border-radius: 50%;
-          border-radius: 50%;
-          background-color: $white;
-          transition: .2s;
-
-          &:hover {
-            transform: scale(1.1);
-          }
-
           img {
-            height: 20px;
+            height: 30px;
             margin: auto;
           }
+        }
+      }
+
+      .back-home {
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+
+        img {
+          width: 30px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        p {
+          color: $white;
+          margin-left: 5px;
+          display: inline-block;
+          font-size: .7em;
         }
       }
 
@@ -236,7 +247,7 @@ body {
         position: absolute;
         bottom: 0;
         top: 0;
-        right: 80px;
+        right: 20px;
 
         div {
           -webkit-border-radius: 50%;
@@ -272,7 +283,6 @@ body {
           margin-left: 5px;
           display: inline-block;
           font-size: .7em;
-          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
       }
     }
@@ -297,14 +307,9 @@ body {
         position: absolute;
         top: 30px;
         right: 20px;
-        width: 30px;
+        height: 30px;
         cursor: pointer;
         transition: .3s;
-
-        &:hover {
-          right: 30px;
-          transform: scale(1.1);
-        }
       }
 
       h2 {
@@ -325,6 +330,25 @@ body {
         margin-top: 20px;
         font-family: 'Gothic A1', sans-serif;
         font-size: .9em;
+      }
+
+      .travelButton {
+        background-color: $yello;
+        padding: 8px 20px;
+        border: 0px;
+        position: absolute;
+        bottom: 20px;
+        right: 30px;
+        color: $white;
+        font-size: .8em;
+      }
+
+      .activeTravelButton {
+        display: block;
+      }
+      
+      .unactiveTravelButton {
+        display: none;
       }
 
       .dashboardContent {
@@ -432,9 +456,8 @@ body {
             margin-top: 30px;
 
             input {
-              width: 30%;
               border: 1px solid $white;
-              padding: 8px 0;
+              padding: 8px 20px;
               background-color: transparent;
               cursor: pointer;
               outline: none;
@@ -442,6 +465,17 @@ body {
               font-size: 1em;
               text-transform: uppercase;
               letter-spacing: 2px;
+            }
+
+            .activeDashboardButton {
+              background-color: $white;
+              border: 1px solid $yello;
+              color: $background;
+            }
+
+            .unactiveDashboardButton {
+              background-color: transparent;
+              border: 1px solid $white;
             }
           }
 
@@ -475,6 +509,415 @@ body {
     }
     .dashboardInactive {
       left: -50%;
+    }
+
+    /* ===================== TRAVELBOARD ===================== */
+
+    .travelboard {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -350px;
+      width: 350px;
+      height: 100%;
+      z-index: 9999;
+      background-color: rgba(3, 0, 29, .8);
+      color: $white;
+      transition: .3s;
+      border: 0px solid red;
+
+      .close-arrow-travelboard {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        height: 25px;
+        transform: rotate(180deg);
+      }
+
+      > div {
+        > div:first-child {
+          border: 1px solid red;
+          padding: 50px 0 35px 0;
+
+          p {
+            text-align: center;
+            font-size: 1.2em;
+
+            span {
+              font-size: 1.2em;
+              font-style: normal;
+              font-weight: bold;
+            }
+
+            &::after {
+              content: '';
+              width: 60px;
+              display: block;
+              border: 1px solid $white;
+              margin: 20px auto;
+            }
+          }
+        }
+
+        ul {
+          border: 1px solid red;
+          padding: 0 50px;
+
+          li {
+            list-style-type: none;
+            margin: 50px 0;
+
+            &:first-child {
+              margin: 0;
+            }
+
+            > p {
+              margin: 2px 0;
+            }
+
+            p:first-child {
+              font-size: .7em;
+            }
+
+            p:nth-child(2) {
+              font-weight: bold;
+              font-size: .9em;
+              letter-spacing: 1px;
+            }
+
+            p:last-child {
+              font-size: .7em;
+            }
+          }
+        }
+
+        > div:last-child {
+          border: 1px solid red;
+          padding: 50px 0;
+
+          button {
+            margin: auto;
+            border: 1px solid $yello;
+            background-color: transparent;
+            color: $yello;
+            padding: 12px 30px;
+            display: block;
+            letter-spacing: 1px;
+          }
+        }
+      }
+    }
+
+    /* ===================== POPUP ===================== */
+
+    .popup-container {
+      position: absolute;
+      bottom: 100px;
+      left: 200px;
+      border: 2px solid $white;
+      padding: 20px 15px;
+      background-color: $backgroundDark;
+      max-width: 300px;
+      display: none;
+
+      .popup {
+        color: $white;
+
+        p:first-child {
+          text-align: center;
+
+          &::after {
+            content: '';
+            width: 60px;
+            display: block;
+            border: 1px solid $white;
+            margin: 20px auto;
+          }
+        }
+
+        .popup-citation {
+          font-size: .8em;
+        }
+
+        .popup-location-info {
+          margin-top: 20px;
+          font-size: .7em;
+        }
+
+        .popup-episode-info {
+          margin-top: 3px;
+          font-size: .7em;
+        }
+
+        p:last-child {
+          text-align: center;
+          color: $yello;
+          font-size: .8em;
+          margin-top: 20px;
+        }
+      }
+
+      span {
+        content: '';
+        width: 30px;
+        height: 30px;
+        background-color: $backgroundDark;
+        background-image: linear-gradient(to right, transparent 50%, $white 0);
+        border-radius: 50%;
+        position: absolute;
+        bottom: -15px;
+        right: -15px;
+      }
+
+      span::before {
+        content: '';
+        display: block;
+        margin-left: 50%;
+        height: 100%;
+        border-radius: 0 100% 100% 0 / 50%;
+        background: $white;
+        transform-origin: left;
+        transform: rotate(.25turn);
+      }
+    }
+
+    /* ===================== MODALE ===================== */
+
+    .modale-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: $backgroundOpacity;
+      z-index: 999;
+      color: $white;
+      transition: .3s;
+
+      .exitIcon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 25px;
+        cursor: pointer;
+        z-index: 9999;
+      }
+
+      .modale-content {
+        width: 80%;
+        border: 0px solid $white;
+        margin: 80px auto 0 auto;
+        position: relative;
+      }
+
+      /* ===================== MODALE STATISTIC ===================== */
+
+      .modale-statistic {
+
+        > div:first-child p:first-child {
+          transform: rotate(-90deg);
+          transform-origin: left top 0;
+          height: 100%;
+          float: left;
+          border: 0px solid red;
+        }
+
+        .country-container {
+          border: 0px solid red;
+
+          .country {
+            width: 50%;
+
+            img {
+              width: 100%;
+              height: 200px;
+              margin: auto;
+              animation-duration: .5s;
+              animation-name: countryAnim;
+            }
+
+            @keyframes countryAnim {
+              from { transform: scale(.1); }
+              to { transform: scale(1); }
+            }
+
+            p {
+              text-align: center;
+              font-size: .7em;
+              margin-top: 5px;
+            }
+          }
+
+          .country-separator {
+            width: 60%;
+            height: 2px;
+            background-color: $white;
+            margin: 20px auto;
+          }
+
+          > p {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+          }
+        }
+
+        > div:nth-child(2) {
+          width: 100%;
+          height: 2px;
+          background-color: $white;
+          margin: 30px 0;
+        }
+
+        > div:nth-child(3) {
+          border: 0px solid red;
+
+          .modale-stat {
+            width: 50%;
+            border: 0px solid red;
+          }
+
+          .modale-stat-1 {
+
+            border: 0px solid green;
+
+            > p {
+              margin-bottom: 20px;
+            }
+
+            .horizontal-rate-line {
+              p:first-child {
+                font-size: .7em;
+              }
+
+              > div {
+                border: 0px solid green;
+                margin-top: 2px;
+
+                div {
+                  width: 70%;
+                  height: 3px;
+                  background-color: $yello;
+                  display: inline-block;
+                  vertical-align: top;
+                  animation-delay: .3s;
+                  animation-name: line-rate-anim;
+                }
+
+                @keyframes line-rate-anim {
+                  from { width: 0px; }
+                  to { width: 50px; }
+                }
+
+                p {
+                  display: inline-block;
+                  font-size: .6em;
+                  margin-left: 30px;
+                  vertical-align: top;
+                }
+              }
+            }
+          }
+
+          .modale-stat-2 {
+            border: 0px solid blue;
+            position: relative;
+
+            > div:first-child {
+              border: 0px solid green;
+              flex: 1;
+
+              .vertical-rate-line-container {
+                margin-right: 15px;
+                border: 0px solid green;
+
+                .vertical-rate-line {
+                  width: 20px;
+                  margin: 0 7px;
+                  background-color: $yello;
+                }
+              }
+            }
+
+            .stat-rea-container {
+
+              > div:first-child p {
+                font-size: .8em;
+              }
+
+              > div:nth-child(2) {
+
+                p {
+                  vertical-align: middle;
+                  margin-bottom: 5px;
+                  font-size: .8em;
+                }
+
+                p::before {
+                  content: "";
+                  margin-right: 5px;
+                  display: inline-block;
+                  width: 15px;
+                  height: 15px;
+                  background-color: $yello;
+                }
+              }
+            }
+
+            > div:last-child {
+              text-align: center;
+              margin-top: 30px;
+
+              > p:first-child {
+                font-size: 2em;
+                color: $yello;
+              }
+
+              > p:last-child {
+                font-size: .8em;
+              }
+            }
+          }
+        }
+      }
+
+      /* ===================== MODALE GALERY ===================== */
+
+      .modale-movies-galery {
+        border: 0px solid red;
+        position: relative;
+
+        > div {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          position: absolute;
+          border: 0px solid red;
+          animation-duration: 20s;
+          animation-name: galeryAnim;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+
+          > div {
+            margin: auto;
+            width: 260px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          > div:nth-child(3n - 1) {
+            border: 0px solid red;
+            margin-top: 200px;
+          }
+        }
+
+        @keyframes galeryAnim {
+          from { top: 0; }
+          to { top: -2000px; }
+        }
+      }
     }
   }
 }

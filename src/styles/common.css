@@ -21,8 +21,33 @@
 .center {
   justify-content: center; }
 
+.wrap {
+  flex-wrap: wrap; }
+
 a {
   text-decoration: none; }
 
 .container {
   min-height: 100vh; }
+
+.uppercase {
+  text-transform: uppercase; }
+
+.zoom {
+  transition: .2s; }
+
+.pointer {
+  cursor: pointer; }
+
+.zoom:hover {
+  transform: scale(1.1);
+  transition: .2s; }
+
+.cormorant-garamond-font {
+  font-family: 'Cormorant Garamond', serif; }
+
+.gothic-font {
+  font-family: 'Gothic A1', sans-serif; }
+
+.italic {
+  font-style: italic; }

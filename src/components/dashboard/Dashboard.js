@@ -3,12 +3,24 @@ import closeArrow from '../../img/close-arrow.svg';
 
 class Dashboard extends Component {
 
+  state = {
+    activeButtonFilms: false,
+    activeButtonSeries: false,
+    activeButtonFilmsAndSeries: false
+  }
+
   closeDashboard = () => {
     this.props.closeDashboard();
   }
 
+  activeButton = (type) => {
+    type === 'films' ? this.setState({activeButtonFilms: true}) : this.setState({activeButtonFilms: false});
+    type === 'series' ? this.setState({activeButtonSeries: true}) : this.setState({activeButtonSeries: false});
+    type === 'filmsAndSeries' ? this.setState({activeButtonFilmsAndSeries: true}) : this.setState({activeButtonFilmsAndSeries: false});
+  }
+
   dashboardContent = () => {
-    if(this.props.dashboardTitle == 'séries') {
+    if(this.props.dashboardTitle === 'séries') {
       return(
         <form className="flex row between">
           <input type="text" placeholder="Nom de la série" className="input"/>
@@ -22,7 +34,10 @@ class Dashboard extends Component {
           <input type="text" placeholder="ÉPISODE (ex:E01)" className="input"/>
         </form>
       );
-    } else if(this.props.dashboardTitle == 'voyage') {
+    } else if(this.props.dashboardTitle === 'voyage') {
+      let activeFilms = this.state.activeButtonFilms ? 'activeDashboardButton' : 'unactiveDashboardButton';
+      let activeSeries = this.state.activeButtonSeries ? 'activeDashboardButton' : 'unactiveDashboardButton';
+      let activeFilmsAndSeries = this.state.activeButtonFilmsAndSeries ? 'activeDashboardButton' : 'unactiveDashboardButton';
       return(
         <form className="flex row between">
           <input type="text" placeholder="Rabat" className="input"/>
@@ -32,13 +47,13 @@ class Dashboard extends Component {
             <input type="range" min="1" max="100" value="50" className="range"/>
           </div>
           <div className="form-button-container flex row between">
-            <input type="submit" value="Films"/>
-            <input type="submit" value="Séries"/>
-            <input type="submit" value="Films et séries"/>
+            <input className={activeFilms} onClick={(films) => this.activeButton('films')} type="submit" value="Films"/>
+            <input className={activeSeries} onClick={(series) => this.activeButton('series')} type="submit" value="Séries"/>
+            <input className={activeFilmsAndSeries} onClick={(filmsAndSeries) => this.activeButton('filmsAndSeries')} type="submit" value="Films et séries"/>
           </div>
         </form>
       );
-    } else if(this.props.dashboardTitle == 'films') {
+    } else if(this.props.dashboardTitle === 'films') {
       return(
         <form className="flex row between">
           <input type="text" placeholder="Nom du film" className="input"/>
@@ -55,10 +70,15 @@ class Dashboard extends Component {
     }
   }
 
+  setDashboardContent = (e, title) => {
+    this.props.setDashboardContent(e, title);
+  }
+
   render() {
+    let activeTravelButton = this.props.dashboardTitle === 'voyage'? 'activeTravelButton' : 'unactiveTravelButton';
     return (
       <div className={'dashboard ' + this.props.className}>
-        <img onClick={this.closeDashboard} className="close-arrow" src={closeArrow}/>
+        <img onClick={this.closeDashboard} className="close-arrow zoom" src={closeArrow} alt=""/>
         <h2>{this.props.dashboardTitle}</h2>
         <h3>FAITES VOTRE SÉLECTION, ET VOYAGEZ !</h3>
         <p>
@@ -70,11 +90,12 @@ class Dashboard extends Component {
         </div>
         <div className="options flex column">
           <ul>
-            <li onClick={(e) => this.setDashboardContent(e, 'séries')} style={this.props.dashboardTitle == 'séries' ? {display: 'none'} : {display: 'block'}}>SÉRIES</li>
-            <li onClick={(e) => this.setDashboardContent(e, 'voyage')} style={this.props.dashboardTitle == 'voyage' ? {display: 'none'} : {display: 'block'}}>VOYAGE</li>
-            <li onClick={(e) => this.setDashboardContent(e, 'films')}  style={this.props.dashboardTitle == 'films'  ? {display: 'none'} : {display: 'block'}}>FILMS</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'séries')} style={this.props.dashboardTitle === 'séries' ? {display: 'none'} : {display: 'block'}} className="cormorant-garamond-font">SÉRIES</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'voyage')} style={this.props.dashboardTitle === 'voyage' ? {display: 'none'} : {display: 'block'}} className="cormorant-garamond-font">VOYAGE</li>
+            <li onClick={(e) => this.setDashboardContent(e, 'films')}  style={this.props.dashboardTitle === 'films'  ? {display: 'none'} : {display: 'block'}} className="cormorant-garamond-font">FILMS</li>
           </ul>
         </div>
+        <button className={'travelButton uppercase pointer ' + activeTravelButton}>Partir à l'aventure</button>
       </div>
     );
   }
