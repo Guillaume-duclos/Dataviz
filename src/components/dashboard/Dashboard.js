@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import closeArrow from '../../img/close-arrow.svg';
+import state1 from '../../img/state-1.svg';
+import state2 from '../../img/state-2.svg';
+import state3 from '../../img/state-3.svg';
 
 class Dashboard extends Component {
 
@@ -22,50 +25,65 @@ class Dashboard extends Component {
   dashboardContent = () => {
     if(this.props.dashboardTitle === 'séries') {
       return(
-        <form className="flex row between">
-          <input type="text" placeholder="Nom de la série" className="input"/>
-          <select name="cars" className="classic select">
-            <option value="v-1">Valeur 1</option>
-            <option value="v-2">Valeur 2</option>
-            <option value="v-3">Valeur 3</option>
-            <option value="v-4">Valeur 4</option>
-          </select>
-          <input type="text" placeholder="SAISON (ex:S01)" className="input"/>
-          <input type="text" placeholder="ÉPISODE (ex:E01)" className="input"/>
-        </form>
+        <div>
+          <form className="flex row between">
+            <input type="text" placeholder="Nom de la série" className="input"/>
+            <select name="cars" className="classic select">
+              <option value="v-1">Valeur 1</option>
+              <option value="v-2">Valeur 2</option>
+              <option value="v-3">Valeur 3</option>
+              <option value="v-4">Valeur 4</option>
+            </select>
+            <input type="text" placeholder="SAISON (ex:S01)" className="input"/>
+            <input type="text" placeholder="ÉPISODE (ex:E01)" className="input"/>
+          </form>
+          <div className="dashboardState">
+            <img src={state1}/>
+          </div>
+        </div>
       );
     } else if(this.props.dashboardTitle === 'voyage') {
       let activeFilms = this.state.activeButtonFilms ? 'activeDashboardButton' : 'unactiveDashboardButton';
       let activeSeries = this.state.activeButtonSeries ? 'activeDashboardButton' : 'unactiveDashboardButton';
       let activeFilmsAndSeries = this.state.activeButtonFilmsAndSeries ? 'activeDashboardButton' : 'unactiveDashboardButton';
       return(
-        <form className="flex row between">
-          <input type="text" placeholder="Rabat" className="input"/>
-          <input type="text" placeholder="Ville d'arrivée" className="input"/>
-          <div className="form-range-container flex row between">
-            <label>Années</label>
-            <input type="range" min="1" max="100" value="50" className="range"/>
+        <div>
+          <form className="flex row between">
+            <input type="text" placeholder="Rabat" className="input"/>
+            <input type="text" placeholder="Ville d'arrivée" className="input"/>
+            <div className="form-range-container flex row between">
+              <label>Années</label>
+              <input type="range" min="1" max="100" value="50" className="range"/>
+            </div>
+            <div className="form-button-container flex row between">
+              <input className={activeFilms} onClick={(films) => this.activeButton('films')} type="submit" value="Films"/>
+              <input className={activeSeries} onClick={(series) => this.activeButton('series')} type="submit" value="Séries"/>
+              <input className={activeFilmsAndSeries} onClick={(filmsAndSeries) => this.activeButton('filmsAndSeries')} type="submit" value="Films et séries"/>
+            </div>
+          </form>
+          <div className="dashboardState">
+            <img src={state2}/>
           </div>
-          <div className="form-button-container flex row between">
-            <input className={activeFilms} onClick={(films) => this.activeButton('films')} type="submit" value="Films"/>
-            <input className={activeSeries} onClick={(series) => this.activeButton('series')} type="submit" value="Séries"/>
-            <input className={activeFilmsAndSeries} onClick={(filmsAndSeries) => this.activeButton('filmsAndSeries')} type="submit" value="Films et séries"/>
-          </div>
-        </form>
+        </div>
       );
     } else if(this.props.dashboardTitle === 'films') {
       return(
-        <form className="flex row between">
-          <input type="text" placeholder="Nom du film" className="input"/>
-          <select name="cars" className="classic select">
-            <option value="v-1">Valeur 1</option>
-            <option value="v-2">Valeur 2</option>
-            <option value="v-3">Valeur 3</option>
-            <option value="v-4">Valeur 4</option>
-          </select>
-          <input type="text" placeholder="ANNÉE DE SORTIE" className="input"/>
-          <input type="text" placeholder="Acteur principal" className="input"/>
-        </form>
+        <div>
+          <form className="flex row between">
+            <input type="text" placeholder="Nom du film" className="input"/>
+            <select name="cars" className="classic select">
+              <option value="v-1">Valeur 1</option>
+              <option value="v-2">Valeur 2</option>
+              <option value="v-3">Valeur 3</option>
+              <option value="v-4">Valeur 4</option>
+            </select>
+            <input type="text" placeholder="ANNÉE DE SORTIE" className="input"/>
+            <input type="text" placeholder="Acteur principal" className="input"/>
+          </form>
+          <div className="dashboardState">
+            <img src={state3}/>
+          </div>
+        </div>
       );
     }
   }

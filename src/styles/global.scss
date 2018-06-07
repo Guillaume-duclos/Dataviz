@@ -354,6 +354,7 @@ body {
       .dashboardContent {
         border: 0px solid red;
         margin-top: 60px;
+        overflow-y: auto;
 
         form {
           padding: 0 50px;
@@ -511,6 +512,12 @@ body {
       left: -50%;
     }
 
+    .dashboardState {
+      margin-top: 30px;
+      width: 100%;
+      padding: 0 50px;
+    }
+
     /* ===================== TRAVELBOARD ===================== */
 
     .travelboard {
@@ -618,7 +625,7 @@ body {
       padding: 20px 15px;
       background-color: $backgroundDark;
       max-width: 300px;
-      display: none;
+
 
       .popup {
         color: $white;
@@ -829,7 +836,8 @@ body {
 
               .vertical-rate-line-container {
                 margin-right: 15px;
-                border: 0px solid green;
+                transform: rotate(180deg);
+                flex-direction: row-reverse;
 
                 .vertical-rate-line {
                   width: 20px;

@@ -248,7 +248,8 @@ body {
         display: none; }
       body .container .dashboard .dashboardContent {
         border: 0px solid red;
-        margin-top: 60px; }
+        margin-top: 60px;
+        overflow-y: auto; }
         body .container .dashboard .dashboardContent form {
           padding: 0 50px;
           flex-wrap: wrap;
@@ -351,6 +352,10 @@ body {
       left: 0; }
     body .container .dashboardInactive {
       left: -50%; }
+    body .container .dashboardState {
+      margin-top: 30px;
+      width: 100%;
+      padding: 0 50px; }
     body .container .travelboard {
       position: absolute;
       top: 0;
@@ -421,8 +426,7 @@ body {
       border: 2px solid #ffffff;
       padding: 20px 15px;
       background-color: #02021a;
-      max-width: 300px;
-      display: none; }
+      max-width: 300px; }
       body .container .popup-container .popup {
         color: #ffffff; }
         body .container .popup-container .popup p:first-child {
@@ -570,7 +574,8 @@ body {
             flex: 1; }
             body .container .modale-container .modale-statistic > div:nth-child(3) .modale-stat-2 > div:first-child .vertical-rate-line-container {
               margin-right: 15px;
-              border: 0px solid green; }
+              transform: rotate(180deg);
+              flex-direction: row-reverse; }
               body .container .modale-container .modale-statistic > div:nth-child(3) .modale-stat-2 > div:first-child .vertical-rate-line-container .vertical-rate-line {
                 width: 20px;
                 margin: 0 7px;

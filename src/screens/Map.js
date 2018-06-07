@@ -50,26 +50,6 @@ class Map extends Component {
 
   componentDidMount() {
     this.setMarkers();
-
-    Axios.get('https://guillaumeduclos.fr/datas.json', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      }
-    }).then(function (response) {
-      console.log('response is : ' + response.data);
-      this.setState({datas: response});
-    }).catch(function (error) {
-      if (error.response) {
-        console.log(error.response.headers);
-      }
-      else if (error.request) {
-        console.log(error.request);
-      }
-      else {
-        console.log(error.message);
-      }
-      console.log(error.config);
-    });
   }
 
   setDashboardContent = (e, title) => {
@@ -109,7 +89,14 @@ class Map extends Component {
     console.log(lat);
     console.log(long);
 
-    let data = this.state.datas;
+    const Headers = new Headers({
+      'Access-Control-Allow-Origin':'*',
+      'Content-Type': 'multipart/form-data'
+    });
+
+    let data = new File(Headers);
+
+    data = Datas;
     let jsObj = JSON.parse(data);
     let find = lat;
 
@@ -128,7 +115,7 @@ class Map extends Component {
       markers.push(<Marker
         key={i} defaultIcon={MarkerIcon}
         position={{ lat: Datas.Movies_datas[i].Latitude, lng: Datas.Movies_datas[i].Longitude }}
-        onClick={(e) => this.markerClicked(Datas.Movies_datas[i].Latitude, Datas.Movies_datas[i].Longitude)}
+        //onClick={(e) => this.markerClicked(Datas.Movies_datas[i].Latitude, Datas.Movies_datas[i].Longitude)}
       />);
     }
     this.setState({markers});
@@ -136,7 +123,7 @@ class Map extends Component {
 
   render() {
 
-    console.log(this.state.datas);
+    console.log(Datas);
 
     return (
       <div className="container map">
